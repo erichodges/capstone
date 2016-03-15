@@ -1,0 +1,35 @@
+<div ng-controller="mainController">
+  <h3>Main Controller working</h3>
+		<div layout="column" ng-cloak>
+  		<md-toolbar class="md-warn">
+    		<div class="md-toolbar-tools">
+      		<h2 class="md-flex">Toolbar: md-warn</h2>
+    		</div>
+  	</md-toolbar>
+  		<md-content flex layout-padding>
+
+	      <div ng-repeat='message in messages'>
+	        <div flex-xs flex-gt-xs="100" layout="column">
+	          <md-card>
+	          	<md-card-title-media>
+	              <div class="md-media-md card-media">
+	                <md-icon class="lg-avatar-icon st-icon">
+	                <img src="{{message.user.avatar_url}}">
+	                </md-icon>
+	              </div>
+	            </md-card-title-media>
+	            <md-card-title>
+	              <md-card-title-text>
+	                <span class="md-headline">{{message.user.username}}</span>
+	                <span class="md-subhead">{{message.body}}</span>
+	              </md-card-title-text>
+	            </md-card-title>
+	            
+	          </md-card>
+	        </div>
+	      </div>
+
+		  </md-content>
+		</div>
+
+</div>

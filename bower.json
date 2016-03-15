@@ -1,0 +1,28 @@
+{
+  "name": "capstone",
+  "description": "capstone project",
+  "main": "/client/index.html",
+  "authors": [
+    "eric"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "none"
+  ],
+  "homepage": "https://github.com/erichodges/capstone",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material-data-table": "~0.9.14",
+    "angular-route": "1.4.x"
+  },
+  "resolutions": {
+    "angular": "1.5.0"
+  }
+}
