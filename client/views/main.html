@@ -9,19 +9,15 @@
   		<md-content flex layout-padding>
 
 	      <div ng-repeat='message in messages'>
-	        <div flex-xs flex-gt-xs="100" layout="column">
+	        <div layout="column">
 	          <md-card>
-	          	<md-card-title-media>
-	              <div class="md-media-md card-media">
-	                <md-icon class="lg-avatar-icon st-icon">
+	            <md-card-title>
+	              <md-card-title-text class="xs-inline">
+	              	<md-icon class="lg-avatar-icon st-icon">
 	                <img src="{{message.user.avatar_url}}">
 	                </md-icon>
-	              </div>
-	            </md-card-title-media>
-	            <md-card-title>
-	              <md-card-title-text>
 	                <span class="md-headline">{{message.user.username}}</span>
-	                <span class="md-subhead">{{message.body}}</span>
+	                <div class="md-subhead">{{message.body}}</div>
 	              </md-card-title-text>
 	            </md-card-title>
 	            
