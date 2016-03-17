@@ -31,6 +31,10 @@ section[flex="70"] {
   background-color: #E8FCD6;
 }
 
+.tickerEntry {
+	height: 50px;
+}
+
 
 .contentdemoBasicUsage div.demo-content {
   height: 600px; }
