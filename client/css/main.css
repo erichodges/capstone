@@ -15,3 +15,37 @@ a {
 .xs-inline {
 	display: inline;
 }
+
+.stocktwits-div-control {
+	width: 100%;
+	height: 600px;
+	border-radius: 4px;
+}
+
+.stocktwits-control {
+	padding: 0px;
+	width: 100%;
+}
+
+section[flex="70"] {
+  background-color: #E8FCD6;
+}
+
+
+.contentdemoBasicUsage div.demo-content {
+  height: 600px; }
+.contentdemoBasicUsage div[ng-controller] {
+  height: 100%;
+  padding-bottom: 15px; }
+.contentdemoBasicUsage md-content {
+  padding: 24px; }
+
+/*.contentdemoBasicUsage div.demo-content {
+  height: 400px; }
+.contentdemoBasicUsage div.demo-content {
+  width: 300px; }  
+.contentdemoBasicUsage div[ng-controller] {
+  height: 600px;
+  padding-bottom: 15px; }
+.contentdemoBasicUsage md-content {
+  padding: 24px; }*/
