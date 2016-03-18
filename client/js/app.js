@@ -1,4 +1,5 @@
-var app =	angular.module('finApp', ['ngRoute', 'ngMaterial']);
+var app =	angular.module('finApp', ['ngRoute', 'ngMaterial', 'md.data.table']);
+
 app.config(function($routeProvider){
     $routeProvider.when('/', {
         templateUrl: "./client/views/main.html",
@@ -14,12 +15,3 @@ app.config(function($routeProvider){
     })
 });
 
-// angular.module('contentDemo1', ['ngMaterial'])
-// .controller('AppCtrl', function($scope) {
-// });
-
-
-// angular.module('cardDemo1', ['ngMaterial'])
-// .controller('AppCtrl', function($scope) {
-//   $scope.imagePath = 'img/washedout.png';
-// });

@@ -1,7 +1,32 @@
-	<div layout="row" flex="100" class="tickerEntry" layout-padding>
-		
-	</div>
-
+<div layout="row" flex="100" class="tickerEntry" layout-padding>
+  <md-content class="md-padding">
+    <form ng-submit="$event.preventDefault()" name="searchForm">
+      <div layout-gt-sm="row">
+        <md-input-container flex>
+          <label>Ticker Symbol</label>
+          <input type="text" ng-model="ticker" />
+        </md-input-container>
+        <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+          <md-button class="md-raised md-primary" ng-click="getStockAPIs()">Go</md-button>
+        </section>
+        <!--         <md-autocomplete flex required
+            md-input-name="autocompleteField"
+            md-input-minlength="2"
+            md-input-maxlength="18"
+            md-no-cache="ctrl.noCache"
+            md-selected-item="ctrl.selectedItem"
+            md-search-text="ctrl.searchText"
+            md-items="item in ctrl.querySearch(ctrl.searchText)"
+            md-item-text="item.display"
+            md-floating-label="Favorite state">
+          <md-item-template>
+            <span md-highlight-text="ctrl.searchText">{{item.display}}</span>
+          </md-item-template>
+        </md-autocomplete> -->
+      </div>
+    </form>
+  </md-content>
+</div>
 <div layout="row" ng-cloak ng-controller="mainController">
   <!-- <h3>Main Controller working</h3> -->
   <div flex="40" class="boxWithHeight" layout-padding>
@@ -32,7 +57,131 @@
   </div>
   <div layout="column" class="boxWithHeight" layout-padding>
     <section flex="60">
-      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+   <!-- Financial Highlights Table-->
+      <md-table-container>
+        <table md-table ng-model="selected" md-progress="promise">
+          <thead md-head md-order="query.order" md-on-reorder="onReorder">
+<!--             <tr md-row>
+              <th md-column md-order-by="nameToLower"><span>Valuation</span></th>              
+            </tr> -->
+          </thead>
+          <tbody md-body>
+            <tr md-row>
+            	<td md-cell><b>Name</b></td>
+              <td md-cell>{{stockDetail.Name}}</td>
+            </tr>
+
+            <tr md-row>
+            	<td md-cell><b>Stock Exchange</b></td>
+              <td md-cell>{{stockDetail.StockExchange}}</td>
+            </tr>
+
+            <tr md-row>
+            	<td md-cell><b>Market Capitalization</b></td>
+              <td md-cell>{{stockDetail.MarketCapitalization}}</td>
+            </tr>
+
+						<tr md-row>
+							<td md-cell><b>PEG Ratio</b></td>
+              <td md-cell>{{stockDetail.PEGRatio}}</td>
+            </tr>
+
+            <tr md-row>
+            	<td md-cell><b>Price Book</b></td>
+              <td md-cell>{{stockDetail.PriceBook}}</td>
+            </tr>
+
+            <tr md-row>
+            	<td md-cell><b>Price Sales</b></td>
+              <td md-cell>{{stockDetail.PriceSales}}</td>
+            </tr>
+
+            <tr md-row>
+            	<td md-cell><b>EBITDA</b></td>
+              <td md-cell>{{stockDetail.EBITDA}}</td>
+            </tr>
+
+            <tr md-row>
+            	<td md-cell><b>EPS Estimate Current Year</b></td>
+              <td md-cell>{{stockDetail.EPSEstimateCurrentYear}}</td>            
+            </tr>            
+
+            <tr md-row>
+            	<td md-cell><b>EPS Estimate Next Quarter</b></td>
+              <td md-cell>{{stockDetail.EPSEstimateNextQuarter}}</td>            
+            </tr>
+
+            <tr md-row>
+            	<td md-cell><b>EPS Estimate Next Year</b></td>
+              <td md-cell>{{stockDetail.EPSEstimateNextYear}}</td>            
+            </tr>
+
+            <tr md-row>
+            	<td md-cell><b>Earnings Share</b></td>
+              <td md-cell>{{stockDetail.EarningsShare}}</td>            
+            </tr>
+
+            <tr md-row>
+            	<td md-cell><b>Change From Year High</b></td>
+              <td md-cell>{{stockDetail.ChangeFromYearHigh}}</td>            
+            </tr>
+
+            <tr md-row>
+            	<td md-cell><b>Change From Year Low</b></td>
+              <td md-cell>{{stockDetail.ChangeFromYearLow}}</td>            
+            </tr>
+
+            <tr md-row>
+            	<td md-cell><b>Dividend Share</b></td>
+              <td md-cell>{{stockDetail.DividendShare}}</td>            
+            </tr>
+
+            <tr md-row>
+            	<td md-cell><b>Dividend Yield</b></td>
+              <td md-cell>{{stockDetail.DividendYield}}</td>            
+            </tr>
+
+            <tr md-row>
+            	<td md-cell><b>Dividend Pay Date</b></td>
+              <td md-cell>{{stockDetail.DividendPayDate}}</td>            
+            </tr>
+
+            <tr md-row>
+            	<td md-cell><b>Ex Dividend Date</b></td>
+              <td md-cell>{{stockDetail.ExDividendDate}}</td>            
+            </tr>
+
+            <tr md-row>
+            	<td md-cell><b>Short Ratio</b></td>
+              <td md-cell>{{stockDetail.ShortRatio}}</td>            
+            </tr>
+
+            <tr md-row>
+            	<td md-cell><b>Year High</b></td>
+              <td md-cell>{{stockDetail.YearHigh}}</td>            
+            </tr>
+
+            <tr md-row>
+            	<td md-cell><b>Year Low</b></td>
+              <td md-cell>{{stockDetail.YearLow}}</td>            
+            </tr>
+          
+            
+						
+						
+						
+          </tbody>
+        </table>
+      </md-table-container>
+      <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{desserts.count}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
     </section>
   </div>
 </div>
+
+
+
+
+
+
+
+
