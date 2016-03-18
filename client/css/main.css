@@ -32,7 +32,15 @@ section[flex="70"] {
 }
 
 .tickerEntry {
-	
+	width: 50%;
+}
+
+.md-card {
+	padding-top: 16px !important;
+}
+
+.md-card-title {
+	padding-top: 16px !important;
 }
 
 
