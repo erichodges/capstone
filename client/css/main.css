@@ -20,11 +20,20 @@ a {
 	width: 100%;
 	height: 600px;
 	border-radius: 4px;
+	padding: 0px;
 }
 
 .stocktwits-control {
 	padding: 0px;
 	width: 100%;
+}
+
+#finHighlights {
+	min-width: 20%;
+}
+
+#chart {
+	vertical-align: bottom;
 }
 
 section[flex="70"] {

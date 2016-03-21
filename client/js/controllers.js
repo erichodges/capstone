@@ -18,16 +18,23 @@ app.controller('mainController', function($scope, $http, $timeout) {
             console.log($scope.stockDetail);
         })
 
-        function generateFormattedDate(num){
-            	var today = new Date();
-							var priorDate = new Date().setDate(today.getDate() - num);
-							var formattedDate = dateFormat(priorDate, "yyyy-mm-dd");
+        var now = new Date();
+        var nowFormatted = now.toISOString().substring(0, 10);        
+				var lastYear = new Date(); 
+				lastYear.setFullYear(now.getFullYear() - 1);
+				var lastYearFormatted = lastYear.toISOString().substring(0, 10)
+				
+				console.log(lastYearFormatted)
+				console.log(nowFormatted)
 
-							return formattedDate;
-        }
 
-        var single_stock_chart_url = ('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22YHOO%22%20and%20startDate%20%3D%20%222009-09-11%22%20and%20endDate%20%3D%20%222010-03-10%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=');
-        $http.get(single_stock_chart_url).then(function(response) {
+
+        var single_stock_chart_url = ('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22' + $scope.ticker + '%22%20and%20startDate%20%3D%20%%22' + lastYearFormatted + '%22%20and%20endDate%20%3D%20%%22' + nowFormatted + '%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=');
+        //console.log(decodeURI(single_stock_chart_url));
+        
+        var testUrl = 'https://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.historicaldata where symbol = "' + $scope.ticker + '" and startDate = "' + lastYearFormatted + '" and endDate = "'  + nowFormatted + '" &format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=';
+
+        $http.get(testUrl).then(function(response) {
             $scope.chartData = response.data.query.results.quote;
             console.log($scope.chartData);
     
@@ -60,10 +67,10 @@ app.controller('mainController', function($scope, $http, $timeout) {
 			  });
     }
 //D3 start
-///////////http://techanjs.org/techan.min.jshttp://techanjs.org/techan.min.js
+///////////
 
-    var margin = {top: 20, right: 20, bottom: 30, left: 50},
-            width = 960 - margin.left - margin.right,
+    var margin = {top: 20, right: 20, bottom: 0, left: 50},
+            width = 850 - margin.left - margin.right,
             height = 500 - margin.top - margin.bottom;
 
     var parseDate = d3.time.format("%Y-%m-%d").parse;
@@ -89,7 +96,7 @@ app.controller('mainController', function($scope, $http, $timeout) {
             .scale(y)
             .orient("left");
 
-    var svg = d3.select("body").append("svg")
+    var svg = d3.select("#chart").append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
         .append("g")
