@@ -32,6 +32,12 @@
 .dialogdemoBasicUsage div#status {
   color: #c60008; }
 
+
+.menudemoMenuWidth .md-menu-demo {
+  padding: 24px; }
+.menudemoMenuWidth .menu-demo-container {
+  min-height: 200px; }
+
 body {
   padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;

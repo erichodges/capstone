@@ -17,6 +17,19 @@
 		<div class="md-toolbar-tools md-primary">
 			<span class="md-flex md-display-2"><h2>StockCheck</h2></span>
 			<span flex></span>
+			 <div layout="column" flex-sm="100" flex="33" layout-align="center center">        
+        <md-menu md-offset="0 -7">
+          <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+          
+            <md-icon md-menu-origin md-svg-icon="client/libs/angular-material/demos/toolbar/demoBasicUsage/img/icons/menu.svg"></md-icon>
+          </md-button>
+          <md-menu-content width="4">
+            <md-menu-item ng-repeat="item in [1, 2, 3]">
+              <md-button ng-click="ctrl.announceClick($index)"> <span md-menu-align-target>Option</span> {{item}} </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </div>
 			<md-button class="md-raised md-accent" ng-click="showConfirm($event)">Login</md-button>
 			 &#160; &#160;
 			<md-button class="md-raised md-accent" ng-click="showAdvanced($event)">Register</md-button>			
