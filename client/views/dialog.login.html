@@ -1,0 +1,59 @@
+<md-dialog aria-label="" class="login-dialog" ng-cloak>
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Please Login</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+    <!-- <br> -->
+    <span flex></span>
+      <md-input-container class="md-block">
+        <md-icon md-svg-src="client/libs/angular-material/demos/input/demoicons/icons/ic_email_24px.svg" class="email"></md-icon>
+        <input ng-model="user.email" type="email" placeholder="Email (required)" ng-required="true">
+      </md-input-container>
+      <md-input-container class="md-block">
+        <md-icon class="password" md-svg-src="client/libs/angular-material/demos/input/demoicons/icons/ic_input_black_24px.svg"></md-icon>
+        <input ng-model="user.password" type="password" placeholder="Password (required)" ng-required="true">
+      </md-input-container>
+      <div layout="row" layout-align="end center">
+      <span flex="80"> </span>
+      <md-button flex="20" class="md-raised md-primary">Login</md-button>
+      </div>
+    </md-dialog-content>   
+  </form>
+</md-dialog>
+<!-- <md-dialog aria-label="Mango (Fruit)" ng-cloak>
+  <form>
+    <div layout="column" layout-padding ng-cloak>
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2>Please Login</h2>
+          <span flex></span>
+          <md-button class="md-icon-button" ng-click="cancel()">
+            <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+      <br/>
+      <md-content class="autoScroll">
+        <md-input-container class="md-block">
+          
+          <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
+          <input ng-model="user.email" type="email" placeholder="Email (required)" ng-required="true">
+        </md-input-container>
+        <md-input-container class="md-block">
+          
+          <md-icon class="password"></md-icon>
+          <input ng-model="user.password" type="password" placeholder="Password (required)" ng-required="true">
+        </md-input-container>
+        <span flex></span>
+        <md-button flex class="md-raised md-primary">Login</md-button>
+      </md-content>
+    </div>
+  </form>
+</md-dialog> -->
