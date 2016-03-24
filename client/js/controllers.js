@@ -109,8 +109,6 @@ app.controller('mainController', function($scope, $http, $timeout, $interval) {
             lastYear.setFullYear(now.getFullYear() - 1);
             var lastYearFormatted = lastYear.toISOString().substring(0, 10)
 
-            // var single_stock_chart_url = ('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22' + $scope.ticker + '%22%20and%20startDate%20%3D%20%%22' + lastYearFormatted + '%22%20and%20endDate%20%3D%20%%22' + nowFormatted + '%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=');
-            // //console.log(decodeURI(single_stock_chart_url));
 
             var testUrl = 'https://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.historicaldata where symbol = "' + $scope.ticker + '" and startDate = "' + lastYearFormatted + '" and endDate = "' + nowFormatted + '" &format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=';
 
@@ -118,7 +116,6 @@ app.controller('mainController', function($scope, $http, $timeout, $interval) {
                 $scope.chartData = response.data.query.results.quote;
 
                 var accessor = candlestick.accessor();
-
                 var data = $scope.chartData.map(function(d) {
 
                     return {
@@ -142,6 +139,13 @@ app.controller('mainController', function($scope, $http, $timeout, $interval) {
                 // Associate the zoom with the scale after a domain has been applied
                 zoom.x(x.zoomable().clamp(false)).y(y);
 
+          //       $scope.ChangeinPercent  = {
+								  //   name: function() {
+								     
+
+								  //   }
+								  // };
+
                 $scope.ticker = '';
             });
         }
@@ -155,7 +159,7 @@ app.controller('mainController', function($scope, $http, $timeout, $interval) {
             left: 50
         },
         width = 850 - margin.left - margin.right,
-        height = 620 - margin.top - margin.bottom;
+        height = 612 - margin.top - margin.bottom;
 
     var parseDate = d3.time.format("%Y-%m-%d").parse;
 

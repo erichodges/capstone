@@ -1,16 +1,13 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var express       = require('express');
+var path          = require('path');
+var favicon       = require('serve-favicon');
+var logger        = require('morgan');
+var cookieParser  = require('cookie-parser');
+var bodyParser    = require('body-parser');
+var knex          = require('./db/knex');
+var routes        = require('./routes/index');
 
-var routes = require('./routes/index');
-
-var books = require('./api/books');
-var authors = require('./api/authors');
-
-var app = express();
+var app           = express();
 
 // view engine setup
 app.use('/client', express.static(__dirname + '/client'));
@@ -27,8 +24,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 
-app.use('/api/books/', books);
-app.use('/api/authors/', authors);
+// app.use('/api/books/', books);
+// app.use('/api/authors/', authors);
 
 // app.get("*", function(req,res){
 //   res.sendFile(path.join(__dirname, '../client', 'index.html'));

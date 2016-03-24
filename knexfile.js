@@ -3,9 +3,10 @@
 module.exports = {
 
   development: {
-    client: 'postgres',
+    client: 'postgresql',
     connection: {
-      database: 'dev-testing'
+      host: 'localhost',
+      database: 'finApp'
     }
   },
 

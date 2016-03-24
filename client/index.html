@@ -20,7 +20,7 @@
 			 <div layout="column" flex-sm="100" flex="33" layout-align="center center">        
         <md-menu md-offset="0 -7">
           <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
-          
+
             <md-icon md-menu-origin md-svg-icon="client/libs/angular-material/demos/toolbar/demoBasicUsage/img/icons/menu.svg"></md-icon>
           </md-button>
           <md-menu-content width="4">
@@ -30,12 +30,12 @@
           </md-menu-content>
         </md-menu>
       </div>
-			<md-button class="md-raised md-accent" ng-click="showConfirm($event)">Login</md-button>
+			<md-button class="md-raised md-accent" ng-click="showConfirm($event)" href="#signin">Login</md-button>
 			 &#160; &#160;
-			<md-button class="md-raised md-accent" ng-click="showAdvanced($event)">Register</md-button>			
+			<md-button class="md-raised md-accent" ng-click="showAdvanced($event)">Register</md-button>	
+			&#160;
 		</div>
 	</md-toolbar>
-
 	<div ng-view>
 	</div>
 

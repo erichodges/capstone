@@ -39,7 +39,7 @@
   min-height: 200px; }
 
 body {
-  padding: 0px;
+  padding: 0px;  
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -88,6 +88,7 @@ section[flex="70"] {
 
 .tickerEntry {
 	width: 50%;
+	padding-left: 17px;
 }
 
 .md-card {
