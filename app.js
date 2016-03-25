@@ -6,8 +6,10 @@ var cookieParser  = require('cookie-parser');
 var bodyParser    = require('body-parser');
 var knex          = require('./db/knex');
 var routes        = require('./routes/index');
-
+var authRoutes    = require('./server/controllers/auth.js');
 var app           = express();
+
+require('dotenv').config();
 
 // view engine setup
 app.use('/client', express.static(__dirname + '/client'));
@@ -23,6 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+app.use('/auth', authRoutes);
 
 // app.use('/api/books/', books);
 // app.use('/api/authors/', authors);

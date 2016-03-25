@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html ng-app="finApp">
-<head>
-	<title></title>
-	<!-- style sheet -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
-<link href="client/libs/angular-material/angular-material.css" rel="stylesheet" type="text/css" >
-<link href="client/libs/angular-material-data-table/dist/md-data-table.min.css" rel="stylesheet" type="text/css"/>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="icon" type="image/x-icon" href="favicon.ico" />
-<link rel="stylesheet" type="text/css" href="client/css/main.css">
-<!-- module -->
 
+<head>
+  <title></title>
+  <!-- style sheet -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+  <link href="client/libs/angular-material/angular-material.css" rel="stylesheet" type="text/css">
+  <link href="client/libs/angular-material-data-table/dist/md-data-table.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="client/css/main.css">
+  <!-- module -->
 </head>
+
 <body>
-	<md-toolbar ng-controller="firstController">
-		<div class="md-toolbar-tools md-primary">
-			<span class="md-flex md-display-2"><h2>StockCheck</h2></span>
-			<span flex></span>
-			 <div layout="column" flex-sm="100" flex="33" layout-align="center center">        
+  <md-toolbar ng-controller="firstController">
+    <div class="md-toolbar-tools md-primary">
+      <span class="md-flex md-display-2"><h2>StockCheck</h2></span>
+      <span flex></span>
+      <div ng-show="user" layout="row">
+        <md-button class="md-raised md-accent" ng-click="addStock($event)">Add Stock</md-button>
+      </div>
+      <div layout="column" flex-sm="100" flex="33" layout-align="end center">
         <md-menu md-offset="0 -7">
           <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
-
             <md-icon md-menu-origin md-svg-icon="client/libs/angular-material/demos/toolbar/demoBasicUsage/img/icons/menu.svg"></md-icon>
           </md-button>
           <md-menu-content width="4">
@@ -30,29 +33,32 @@
           </md-menu-content>
         </md-menu>
       </div>
-			<md-button class="md-raised md-accent" ng-click="showConfirm($event)" href="#signin">Login</md-button>
-			 &#160; &#160;
-			<md-button class="md-raised md-accent" ng-click="showAdvanced($event)">Register</md-button>	
-			&#160;
-		</div>
-	</md-toolbar>
-	<div ng-view>
-	</div>
-
-
-
-
-	<script src="client/libs/angular/angular.js"type="text/javascript"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.js"></script>
-	<script src="client/libs/angular-aria/angular-aria.js" type="text/javascript"></script>
-	<script src="client/libs/angular-animate/angular-animate.js" type="text/javascript"></script>
-	<script src="client/libs/angular-material/angular-material.js" type="text/javascript"></script>
-	<script src="client/libs/angular-messages/angular-messages.js" type="text/javascript"></script>
-	<script src="client/libs/angular-material-data-table/dist/md-data-table.min.js" type="text/javascript" ></script>
-	<script src="http://d3js.org/d3.v3.min.js"></script>
-	<script src="http://techanjs.org/techan.min.js"></script>
-	<script src="/client/js/app.js"></script>  
+      <div ng-show="!user">
+        <md-button class="md-raised md-accent" ng-click="showLoginDialog($event)">Login</md-button>
+        &#160; &#160;
+        <md-button class="md-raised md-accent" ng-click="showRegisterDialog($event)">Register</md-button>
+        &#160;
+      </div>
+      <div ng-show="user" layout="row" layout-align="center center">
+        <h3>Welcome {{user}}</h3> &#160;
+        <md-button class="md-raised md-accent" ng-click="logout($event)">Logout</md-button>
+      </div>
+    </div>
+  </md-toolbar>
+  <div ng-view>
+  </div>
+  <script src="client/libs/angular/angular.js" type="text/javascript"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.js"></script>
+  <script src="client/libs/angular-aria/angular-aria.js" type="text/javascript"></script>
+  <script src="client/libs/angular-animate/angular-animate.js" type="text/javascript"></script>
+  <script src="client/libs/angular-material/angular-material.js" type="text/javascript"></script>
+  <script src="client/libs/angular-messages/angular-messages.js" type="text/javascript"></script>
+  <script src="client/libs/angular-material-data-table/dist/md-data-table.min.js" type="text/javascript"></script>
+  <script src="https://rawgit.com/hiebj/ng-focus-if/master/focusIf.min.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://techanjs.org/techan.min.js"></script>
+  <script src="/client/js/app.js"></script>
   <script src="/client/js/controllers.js"></script>
-	
 </body>
+
 </html>

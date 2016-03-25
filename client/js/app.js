@@ -1,15 +1,15 @@
-var app =	angular.module('finApp', ['ngRoute', 'ngMaterial', 'ngAnimate', 'ngAria', 'md.data.table', 'ngMessages']);
+var app =	angular.module('finApp', ['ngRoute', 'ngMaterial', 'ngAnimate', 'ngAria', 'md.data.table', 'ngMessages', 'focus-if']);
 
 	app.config(function($routeProvider){
 	    $routeProvider.when('/', {
 	        templateUrl: "./client/views/main.html",
 	        controller: "mainController"
-	    }).when('/about', {
-	        templateUrl: "./views/about.html",
-	        controller: "AboutController"
-	    }).when('/signin', {
-	        templateUrl: "./views/signin.html",
-	        controller: "SigningController"
+	    //}).when('/register', {
+	    //     templateUrl: "./client/views/dialog.registration.html",
+	    //     controller: "SigningController"
+	    // }).when('/signin', {
+	    //     templateUrl: "./client/views/dialog.login.html",
+	    //     controller: "SigningController"
 	    }).otherwise({
 	        redirectTo: '/'
 	    })

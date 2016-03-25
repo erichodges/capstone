@@ -1,65 +1,56 @@
 app.controller('firstController', function($scope, $mdMedia, $mdDialog) {
 
-    $scope.status = '  ';
+    $scope.status = '';
     $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
 
-    $scope.showConfirm = function(ev) {
+    $scope.user = localStorage.getItem('user');
+    $scope.$on('loginSuccess', function(event, args) {
+        $scope.user = args;
+        localStorage.setItem('user', $scope.user);
+
+        //grab saved stocks from database on successful login
+        
+        console.log('happened', args)
+
+        $mdDialog.hide();
+    })
+
+    $scope.showLoginDialog = function(ev) {
 
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
         $mdDialog.show({
-                controller: 'firstController',
+                controller: 'SigningController',
                 templateUrl: 'client/views/dialog.login.html',
                 parent: angular.element(document.body),
                 targetEvent: ev,
                 clickOutsideToClose: true,
                 fullscreen: useFullScreen
-            })
-            .then(function(answer) {
-                $scope.status = 'You said the information was "' + answer + '".';
-            }, function() {
-                $scope.status = 'You cancelled the dialog.';
             });
+
     };
 
-    $scope.statuses = ['Planned', 'Confirmed', 'Cancelled'];
-    $scope.options = ['Option 1', 'Option 2', 'Option 3', 'Option 4', '...'];
-    $scope.submit = function() {
-        // submit code goes here
+
+    $scope.logout = function() {
+        localStorage.clear();
+        $scope.user = undefined;
     };
-    $scope.resetRegistrationInput = function() {
-        $scope.obj = {
-            name: "",
-            myselect: "",
-            status: ""
-        }
-    };
-    $scope.resetRegistrationInput();
-
-    // $scope.user = {
-    //     name: 'John Doe',
-    //     email: '',
-    //     phone: '',
-    //     address: 'Mountain View, CA',
-    //     donation: 19.99
-    // };
 
 
-
-    $scope.showAdvanced = function(ev) {
+    $scope.showRegisterDialog = function(ev) {
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
         $mdDialog.show({
-                controller: 'firstController',
+                controller: 'SigningController',
                 templateUrl: 'client/views/dialog.registration.html',
                 parent: angular.element(document.body),
                 targetEvent: ev,
                 clickOutsideToClose: true,
                 fullscreen: useFullScreen
             })
-            .then(function(answer) {
-                $scope.status = 'You said the information was "' + answer + '".';
-            }, function() {
-                $scope.status = 'You cancelled the dialog.';
-            });
+            // .then(function(answer) {
+            //     $scope.status = 'You said the information was "' + answer + '".';
+            // }, function() {
+            //     $scope.status = 'You cancelled the dialog.';
+            // });
 
     };
 
@@ -83,7 +74,58 @@ app.controller('firstController', function($scope, $mdMedia, $mdDialog) {
     });
 
 });
+//////////
+// Login and Register Controllers
+//////////
+app.controller("SigningController", function($scope, $location, $http, $rootScope) {
+    $scope.signup = function() {
+        var url = '/auth/api/signup';
+        console.log('signing controller')
 
+        $http({
+            method: "POST",
+            url: url,
+            data: $scope.user
+        }).then(function(data) {
+            // Save the JWT to localStorage so we can use it later
+            localStorage.setItem('jwt', data.data.jwt);
+            $rootScope.$broadcast('loginSuccess', $scope.user.email);
+            $scope.user = {};
+            console.log('broadcast is working')
+
+        }).catch(function(err) {
+            console.log(err);
+            console.log("BAD THING ^^^");
+        });
+    };
+    $scope.login = function() {
+        var url = '/auth/api/login';
+
+        var loginPostData = {
+            username: $scope.user.email,
+            password: $scope.user.password
+        };
+
+        $http({
+            method: "POST",
+            url: url,
+            data: loginPostData
+        }).then(function(data) {
+            // Save the JWT to localStorage so we can use it later
+            localStorage.setItem('jwt', data.data.jwt);
+            $rootScope.$broadcast('loginSuccess', $scope.user.email);
+            $scope.user = {
+                username: data.data.email
+            };
+            // console.log($scope.user)
+
+        }).catch(function(err) {
+            console.log(err);
+            console.log("BAD THING ^^^");
+        });
+    };
+
+});
 
 app.controller('mainController', function($scope, $http, $timeout, $interval) {
 
@@ -139,12 +181,12 @@ app.controller('mainController', function($scope, $http, $timeout, $interval) {
                 // Associate the zoom with the scale after a domain has been applied
                 zoom.x(x.zoomable().clamp(false)).y(y);
 
-          //       $scope.ChangeinPercent  = {
-								  //   name: function() {
-								     
+                //       $scope.ChangeinPercent  = {
+                //   name: function() {
 
-								  //   }
-								  // };
+
+                //   }
+                // };
 
                 $scope.ticker = '';
             });
@@ -230,10 +272,10 @@ app.controller('mainController', function($scope, $http, $timeout, $interval) {
         svg.select("g.x.axis").call(xAxis);
         svg.select("g.y.axis").call(yAxis)
     }
-///end of chart functionality
+    ///end of chart functionality
 
 
- 
+
 
 
 });
