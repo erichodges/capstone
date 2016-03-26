@@ -149,7 +149,9 @@ app.controller('mainController', function($scope, $http, $timeout, $interval, $r
     			$http({
     				method: "GET",
     				url: url,
-
+    				params: {
+                jwt: localStorage.getItem('jwt')                
+            }
     			}).then(function(res){
     				$scope.stockDB = res.data;
     				console.log($scope.stockDB)

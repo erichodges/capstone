@@ -74,12 +74,39 @@ router.post('/auth/api/stockPost', function(req, res, next) {
 // })
 
 router.get('/stocks', function(req, res, next) {
-		    knex('stocks').select('*').then(function(rows) {
-		    	console.log(rows);
-    	res.send(rows);
-    	
-    });
-})
+		  var token = req.query.jwt;
+   	  console.log(token, "Yo token check", req.query)
+    	if (token) {
 
+        // verifies secret and checks exp
+        jwt.verify(token, process.env.SECRET_KEY, function(err, decoded) {
+            if (err) {
+                return res.json({
+                    success: false,
+                    message: 'Failed to authenticate token.'
+                });
+            } else {
+                // if everything is good, save to request for use in other routes
+                req.decoded = decoded;
+                console.log(req.decoded)
+                		  knex('stocks').select('*').where({user_id: req.decoded.user_id}).then(function(rows) {
+
+                		    	console.log(rows, req.decoded.user_id);
+                    	res.send(rows);
+
+            });
+        };
+			});
+    } else {
+
+        // if there is no token
+        // return an error
+        return res.status(403).send({
+            success: false,
+            message: 'No token provided.'
+        });
+
+    }
+  });
 
 module.exports = router;
