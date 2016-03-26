@@ -1,23 +1,37 @@
 <div layout="row" flex="100" class="tickerEntry" layout-padding>
-  
   <md-content class="md-padding md-whiteframe-z1">
     <form ng-submit="getStockAPIs()" name="searchForm" autocomplete="off">
       <div layout-gt-sm="row">
         <md-input-container flex>
           <label>Enter Ticker Symbol</label>
-          <input type="text" ng-model="ticker" focus-if/>
+          <input type="text" ng-model="ticker" />
         </md-input-container>
         <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
           <md-button class="md-raised md-primary" type="submit">Go</md-button>
-         
-          <h2> &#160; {{stockDetail.Name}} &#160;${{stockDetail.LastTradePriceOnly}} &#160; &#160;</h2><h2 ng-model="ChangeinPercent">{{stockDetail.ChangeinPercent}}</h2>
+          <h2> &#160; {{stockDetail.Name}} &#160;${{stockDetail.LastTradePriceOnly}} &#160; &#160;</h2>
+          <h2 ng-model="ChangeinPercent">{{stockDetail.ChangeinPercent}}</h2>
+          <!-- Add stock to DB -->
+          <div layout="row">
+            <md-button class="md-raised md-accent" ng-click="sendStockToDB($event)">Add Stock</md-button>
+          </div>
+          </section>
+          <div layout="row" flex-sm="25" flex="20" layout-align="begin center">
+            <md-menu md-offset="0 -7">
+              <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event);getStockFromDB($event)">
+                <md-icon md-menu-origin md-svg-icon="client/libs/angular-material/demos/toolbar/demoBasicUsage/img/icons/menu.svg"></md-icon>
+              </md-button>
+              <md-menu-content width="4">
+                <md-menu-item ng-repeat="stock in stockDB">
+                  <md-button ng-click="setStock(stock.stock)"> <span md-menu-align-target></span> {{stock.stock}} </md-button>
+                </md-menu-item>
+              </md-menu-content>
+            </md-menu>
+          </div>
         
-        </section>
         <!-- consider auto complete (off) to stop chrome from showing previously entered info-->
       </div>
     </form>
   </md-content>
-  
 </div>
 <div layout="row" layout-sm="column" ng-cloak layout-padding>
   <!-- <h3>Main Controller working</h3> -->
@@ -49,103 +63,103 @@
   </div>
   <div layout="column" class="boxWithHeight" layout-padding id="finHighlights">
     <!-- <section flex="60"> -->
-      <!-- Financial Highlights Table-->
-      <div layout="column" ng-cloak="" class="stocktwits-div-control md-whiteframe-z1">
-        <md-toolbar class="md-primary">
-          <div class="md-toolbar-tools">
-            <h2 class="md-flex">Financial Highlights</h2>
-          </div>
-        </md-toolbar>
-        <md-table-container>
-          <table md-table ng-model="selected" md-progress="promise">
-            <thead md-head md-order="query.order" md-on-reorder="onReorder">
-            </thead>
-            <tbody md-body>
-              <tr md-row>
-                <td md-cell><b>Name</b></td>
-                <td md-cell>{{stockDetail.Name}}</td>
-              </tr>
-              <tr md-row>
-                <td md-cell><b>Stock Exchange</b></td>
-                <td md-cell>{{stockDetail.StockExchange}}</td>
-              </tr>
-              <tr md-row>
-                <td md-cell><b>Market Capitalization</b></td>
-                <td md-cell>{{stockDetail.MarketCapitalization}}</td>
-              </tr>
-              <tr md-row>
-                <td md-cell><b>PEG Ratio</b></td>
-                <td md-cell>{{stockDetail.PEGRatio}}</td>
-              </tr>
-              <tr md-row>
-                <td md-cell><b>Price Book</b></td>
-                <td md-cell>{{stockDetail.PriceBook}}</td>
-              </tr>
-              <tr md-row>
-                <td md-cell><b>Price Sales</b></td>
-                <td md-cell>{{stockDetail.PriceSales}}</td>
-              </tr>
-              <tr md-row>
-                <td md-cell><b>EBITDA</b></td>
-                <td md-cell>{{stockDetail.EBITDA}}</td>
-              </tr>
-              <tr md-row>
-                <td md-cell><b>EPS Estimate Current Year</b></td>
-                <td md-cell>{{stockDetail.EPSEstimateCurrentYear}}</td>
-              </tr>
-              <tr md-row>
-                <td md-cell><b>EPS Estimate Next Quarter</b></td>
-                <td md-cell>{{stockDetail.EPSEstimateNextQuarter}}</td>
-              </tr>
-              <tr md-row>
-                <td md-cell><b>EPS Estimate Next Year</b></td>
-                <td md-cell>{{stockDetail.EPSEstimateNextYear}}</td>
-              </tr>
-              <tr md-row>
-                <td md-cell><b>Earnings Share</b></td>
-                <td md-cell>{{stockDetail.EarningsShare}}</td>
-              </tr>
-              <tr md-row>
-                <td md-cell><b>Change From Year High</b></td>
-                <td md-cell>{{stockDetail.ChangeFromYearHigh}}</td>
-              </tr>
-              <tr md-row>
-                <td md-cell><b>Change From Year Low</b></td>
-                <td md-cell>{{stockDetail.ChangeFromYearLow}}</td>
-              </tr>
-              <tr md-row>
-                <td md-cell><b>Dividend Share</b></td>
-                <td md-cell>{{stockDetail.DividendShare}}</td>
-              </tr>
-              <tr md-row>
-                <td md-cell><b>Dividend Yield</b></td>
-                <td md-cell>{{stockDetail.DividendYield}}</td>
-              </tr>
-              <tr md-row>
-                <td md-cell><b>Dividend Pay Date</b></td>
-                <td md-cell>{{stockDetail.DividendPayDate}}</td>
-              </tr>
-              <tr md-row>
-                <td md-cell><b>Ex Dividend Date</b></td>
-                <td md-cell>{{stockDetail.ExDividendDate}}</td>
-              </tr>
-              <tr md-row>
-                <td md-cell><b>Short Ratio</b></td>
-                <td md-cell>{{stockDetail.ShortRatio}}</td>
-              </tr>
-              <tr md-row>
-                <td md-cell><b>Year High</b></td>
-                <td md-cell>{{stockDetail.YearHigh}}</td>
-              </tr>
-              <tr md-row>
-                <td md-cell><b>Year Low</b></td>
-                <td md-cell>{{stockDetail.YearLow}}</td>
-              </tr>
-            </tbody>
-          </table>
-        </md-table-container>
-        <!-- <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{desserts.count}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination> -->
-      </div>
+    <!-- Financial Highlights Table-->
+    <div layout="column" ng-cloak="" class="stocktwits-div-control md-whiteframe-z1">
+      <md-toolbar class="md-primary">
+        <div class="md-toolbar-tools">
+          <h2 class="md-flex">Financial Highlights</h2>
+        </div>
+      </md-toolbar>
+      <md-table-container>
+        <table md-table ng-model="selected" md-progress="promise">
+          <thead md-head md-order="query.order" md-on-reorder="onReorder">
+          </thead>
+          <tbody md-body>
+            <tr md-row>
+              <td md-cell><b>Name</b></td>
+              <td md-cell>{{stockDetail.Name}}</td>
+            </tr>
+            <tr md-row>
+              <td md-cell><b>Stock Exchange</b></td>
+              <td md-cell>{{stockDetail.StockExchange}}</td>
+            </tr>
+            <tr md-row>
+              <td md-cell><b>Market Capitalization</b></td>
+              <td md-cell>{{stockDetail.MarketCapitalization}}</td>
+            </tr>
+            <tr md-row>
+              <td md-cell><b>PEG Ratio</b></td>
+              <td md-cell>{{stockDetail.PEGRatio}}</td>
+            </tr>
+            <tr md-row>
+              <td md-cell><b>Price Book</b></td>
+              <td md-cell>{{stockDetail.PriceBook}}</td>
+            </tr>
+            <tr md-row>
+              <td md-cell><b>Price Sales</b></td>
+              <td md-cell>{{stockDetail.PriceSales}}</td>
+            </tr>
+            <tr md-row>
+              <td md-cell><b>EBITDA</b></td>
+              <td md-cell>{{stockDetail.EBITDA}}</td>
+            </tr>
+            <tr md-row>
+              <td md-cell><b>EPS Estimate Current Year</b></td>
+              <td md-cell>{{stockDetail.EPSEstimateCurrentYear}}</td>
+            </tr>
+            <tr md-row>
+              <td md-cell><b>EPS Estimate Next Quarter</b></td>
+              <td md-cell>{{stockDetail.EPSEstimateNextQuarter}}</td>
+            </tr>
+            <tr md-row>
+              <td md-cell><b>EPS Estimate Next Year</b></td>
+              <td md-cell>{{stockDetail.EPSEstimateNextYear}}</td>
+            </tr>
+            <tr md-row>
+              <td md-cell><b>Earnings Share</b></td>
+              <td md-cell>{{stockDetail.EarningsShare}}</td>
+            </tr>
+            <tr md-row>
+              <td md-cell><b>Change From Year High</b></td>
+              <td md-cell>{{stockDetail.ChangeFromYearHigh}}</td>
+            </tr>
+            <tr md-row>
+              <td md-cell><b>Change From Year Low</b></td>
+              <td md-cell>{{stockDetail.ChangeFromYearLow}}</td>
+            </tr>
+            <tr md-row>
+              <td md-cell><b>Dividend Share</b></td>
+              <td md-cell>{{stockDetail.DividendShare}}</td>
+            </tr>
+            <tr md-row>
+              <td md-cell><b>Dividend Yield</b></td>
+              <td md-cell>{{stockDetail.DividendYield}}</td>
+            </tr>
+            <tr md-row>
+              <td md-cell><b>Dividend Pay Date</b></td>
+              <td md-cell>{{stockDetail.DividendPayDate}}</td>
+            </tr>
+            <tr md-row>
+              <td md-cell><b>Ex Dividend Date</b></td>
+              <td md-cell>{{stockDetail.ExDividendDate}}</td>
+            </tr>
+            <tr md-row>
+              <td md-cell><b>Short Ratio</b></td>
+              <td md-cell>{{stockDetail.ShortRatio}}</td>
+            </tr>
+            <tr md-row>
+              <td md-cell><b>Year High</b></td>
+              <td md-cell>{{stockDetail.YearHigh}}</td>
+            </tr>
+            <tr md-row>
+              <td md-cell><b>Year Low</b></td>
+              <td md-cell>{{stockDetail.YearLow}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </md-table-container>
+      <!-- <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{desserts.count}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination> -->
+    </div>
     <!-- </section> -->
   </div>
   <div id="chart">

@@ -1,4 +1,4 @@
-var app =	angular.module('finApp', ['ngRoute', 'ngMaterial', 'ngAnimate', 'ngAria', 'md.data.table', 'ngMessages', 'focus-if']);
+var app =	angular.module('finApp', ['ngRoute', 'ngMaterial', 'ngAnimate', 'ngAria', 'md.data.table', 'ngMessages']);
 
 	app.config(function($routeProvider){
 	    $routeProvider.when('/', {

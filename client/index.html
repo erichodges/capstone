@@ -18,17 +18,15 @@
     <div class="md-toolbar-tools md-primary">
       <span class="md-flex md-display-2"><h2>StockCheck</h2></span>
       <span flex></span>
-      <div ng-show="user" layout="row">
-        <md-button class="md-raised md-accent" ng-click="addStock($event)">Add Stock</md-button>
-      </div>
-      <div layout="column" flex-sm="100" flex="33" layout-align="end center">
+      <!-- Stored stock info -->
+      <div ng-show="user" layout="column" flex-sm="100" flex="33" layout-align="end center">
         <md-menu md-offset="0 -7">
           <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
             <md-icon md-menu-origin md-svg-icon="client/libs/angular-material/demos/toolbar/demoBasicUsage/img/icons/menu.svg"></md-icon>
           </md-button>
           <md-menu-content width="4">
-            <md-menu-item ng-repeat="item in [1, 2, 3]">
-              <md-button ng-click="ctrl.announceClick($index)"> <span md-menu-align-target>Option</span> {{item}} </md-button>
+            <md-menu-item ng-repeat="stock in stocks">
+              <md-button ng-click="ctrl.announceClick($index)"> <span md-menu-align-target></span> {{stock}} </md-button>
             </md-menu-item>
           </md-menu-content>
         </md-menu>
@@ -53,8 +51,7 @@
   <script src="client/libs/angular-animate/angular-animate.js" type="text/javascript"></script>
   <script src="client/libs/angular-material/angular-material.js" type="text/javascript"></script>
   <script src="client/libs/angular-messages/angular-messages.js" type="text/javascript"></script>
-  <script src="client/libs/angular-material-data-table/dist/md-data-table.min.js" type="text/javascript"></script>
-  <script src="https://rawgit.com/hiebj/ng-focus-if/master/focusIf.min.js"></script>
+  <script src="client/libs/angular-material-data-table/dist/md-data-table.min.js" type="text/javascript"></script>  
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="http://techanjs.org/techan.min.js"></script>
   <script src="/client/js/app.js"></script>

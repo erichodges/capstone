@@ -57,7 +57,8 @@ app.post('/api/login', function(req, res) {
                         // In our case, email and password are required
                         var token = jwt.sign({
                             email: rows[0].email,
-                            password: rows[0].password
+                            password: rows[0].password,
+                            user_id: rows[0].user_id
                         }, process.env.SECRET_KEY); //call .env
 
                         // On success, we send the token back

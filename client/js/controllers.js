@@ -1,4 +1,4 @@
-app.controller('firstController', function($scope, $mdMedia, $mdDialog) {
+app.controller('firstController', function($scope, $mdMedia, $mdDialog, $http) {
 
     $scope.status = '';
     $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
@@ -9,23 +9,25 @@ app.controller('firstController', function($scope, $mdMedia, $mdDialog) {
         localStorage.setItem('user', $scope.user);
 
         //grab saved stocks from database on successful login
-        
+
         console.log('happened', args)
 
         $mdDialog.hide();
     })
 
+
+
     $scope.showLoginDialog = function(ev) {
 
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
         $mdDialog.show({
-                controller: 'SigningController',
-                templateUrl: 'client/views/dialog.login.html',
-                parent: angular.element(document.body),
-                targetEvent: ev,
-                clickOutsideToClose: true,
-                fullscreen: useFullScreen
-            });
+            controller: 'SigningController',
+            templateUrl: 'client/views/dialog.login.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose: true,
+            fullscreen: useFullScreen
+        });
 
     };
 
@@ -39,18 +41,13 @@ app.controller('firstController', function($scope, $mdMedia, $mdDialog) {
     $scope.showRegisterDialog = function(ev) {
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
         $mdDialog.show({
-                controller: 'SigningController',
-                templateUrl: 'client/views/dialog.registration.html',
-                parent: angular.element(document.body),
-                targetEvent: ev,
-                clickOutsideToClose: true,
-                fullscreen: useFullScreen
-            })
-            // .then(function(answer) {
-            //     $scope.status = 'You said the information was "' + answer + '".';
-            // }, function() {
-            //     $scope.status = 'You cancelled the dialog.';
-            // });
+            controller: 'SigningController',
+            templateUrl: 'client/views/dialog.registration.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose: true,
+            fullscreen: useFullScreen
+        });
 
     };
 
@@ -78,6 +75,7 @@ app.controller('firstController', function($scope, $mdMedia, $mdDialog) {
 // Login and Register Controllers
 //////////
 app.controller("SigningController", function($scope, $location, $http, $rootScope) {
+
     $scope.signup = function() {
         var url = '/auth/api/signup';
         console.log('signing controller')
@@ -126,10 +124,42 @@ app.controller("SigningController", function($scope, $location, $http, $rootScop
     };
 
 });
+///////////
+//Main Controller
+///////////
+app.controller('mainController', function($scope, $http, $timeout, $interval, $rootScope) {
 
-app.controller('mainController', function($scope, $http, $timeout, $interval) {
+    $scope.sendStockToDB = function(ev) {
+        var url = '/auth/api/stockPost';
+        // $scope.$on('tickerEntry', )
+        $http({
+            method: "POST",
+            url: url,
+            data: {
+                jwt: localStorage.getItem('jwt'),
+                stock: $scope.ticker
+            }
 
+        });
+        // console.log(data, $scope.ticker)
+    };
 
+    $scope.getStockFromDB = function(ev) {
+    	var url = '/stocks';
+    			$http({
+    				method: "GET",
+    				url: url,
+
+    			}).then(function(res){
+    				$scope.stockDB = res.data;
+    				console.log($scope.stockDB)
+    			})
+    };
+
+    $scope.setStock = function(ticker) {
+    	$scope.ticker = ticker;
+    	$scope.getStockAPIs();
+    }
 
     $scope.getStockAPIs = function() {
 
@@ -187,8 +217,8 @@ app.controller('mainController', function($scope, $http, $timeout, $interval) {
 
                 //   }
                 // };
-
-                $scope.ticker = '';
+                // $rootScope.$broadcast('tickerEntry', $scope.ticker);
+                // $scope.ticker = '';
             });
         }
         //D3 start
