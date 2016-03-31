@@ -50,7 +50,7 @@ router.post('/auth/api/stockPost', function(req, res, next) {
 
         if (rows.length === 0) {
             knex('stocks').insert({
-                user_id: req.decoded.user_id, //this user_id part is not right
+                user_id: req.decoded.user_id,
                 stock: newStock.stock
 
             }).returning('*').then(function(data) {

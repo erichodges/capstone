@@ -141,7 +141,7 @@ app.controller('mainController', function($scope, $http, $timeout, $interval, $r
             }
 
         });
-        // console.log(data, $scope.ticker)
+        
     };
 
     $scope.getStockFromDB = function(ev) {
@@ -213,14 +213,7 @@ app.controller('mainController', function($scope, $http, $timeout, $interval, $r
                 // Associate the zoom with the scale after a domain has been applied
                 zoom.x(x.zoomable().clamp(false)).y(y);
 
-                //       $scope.ChangeinPercent  = {
-                //   name: function() {
 
-
-                //   }
-                // };
-                // $rootScope.$broadcast('tickerEntry', $scope.ticker);
-                // $scope.ticker = '';
             });
         }
         //D3 start

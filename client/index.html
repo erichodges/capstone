@@ -18,19 +18,6 @@
     <div class="md-toolbar-tools md-primary">
       <span class="md-flex md-display-2"><h2>StockCheck</h2></span>
       <span flex></span>
-      <!-- Stored stock info -->
-      <div ng-show="user" layout="column" flex-sm="100" flex="33" layout-align="end center">
-        <md-menu md-offset="0 -7">
-          <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
-            <md-icon md-menu-origin md-svg-icon="client/libs/angular-material/demos/toolbar/demoBasicUsage/img/icons/menu.svg"></md-icon>
-          </md-button>
-          <md-menu-content width="4">
-            <md-menu-item ng-repeat="stock in stocks">
-              <md-button ng-click="ctrl.announceClick($index)"> <span md-menu-align-target></span> {{stock}} </md-button>
-            </md-menu-item>
-          </md-menu-content>
-        </md-menu>
-      </div>
       <div ng-show="!user">
         <md-button class="md-raised md-accent" ng-click="showLoginDialog($event)">Login</md-button>
         &#160; &#160;
